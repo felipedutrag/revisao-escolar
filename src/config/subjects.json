@@ -1,0 +1,23 @@
+{
+  "subjects": [
+    {
+      "id": "ingles-basico",
+      "title": "Inglês Básico",
+      "topics": [
+        "Pronomes (Subject, Possessive Adjectives, Possessive Pronouns)",
+        "Vocabulário: A Casa (Rooms of the House)",
+        "Caso Genitivo (Genitive Case / Possessive 's)"
+      ]
+    },
+    {
+      "id": "historia-civilizacoes",
+      "title": "História: Civilizações e Povos Nativos",
+      "topics": [
+        "Civilizações da Mesoamérica e Andes (Astecas, Maias, Incas)",
+        "Povos Nativos da América do Norte e Ártico (Sioux, Inuítes)",
+        "Povos Nativos da América do Sul (Tupis)",
+        "Estruturas Gerais de Estudo (Organização Social, Cosmovisão)"
+      ]
+    }
+  ]
+}
