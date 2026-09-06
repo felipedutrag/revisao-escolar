@@ -28,7 +28,7 @@ flowchart TD
     WebAudio -->|Base64 PCM Chunks over WebSocket| GeminiWS[Gemini Multimodal Live API]
     
     subgraph Pedagogical AI Pipeline
-        GeminiWS -->|Socratic Questioning & Reasoning| Syllabus[(Curriculum Syllabus JSON)]
+        GeminiWS -->|Socratic Questioning & Reasoning| Syllabus[("Curriculum Syllabus JSON")]
         GeminiWS -->|Function Calling / Tool Execution| ToolHandler[Tutor Tool Controller]
         ToolHandler -->|registrar_desempenho| ScoreLog[Progress & Mastery Log]
         ToolHandler -->|gerar_relatorio_pdf| PDFEngine[jsPDF Generator]
