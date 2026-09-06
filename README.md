@@ -1,4 +1,4 @@
-﻿# 🚀 Revisão Escolar — Real-Time Voice AI Space Tutor for K-12 Students
+# 🚀 Revisão Escolar — Real-Time Voice AI Space Tutor for K-12 Students
 
 <p align=center>
   <img src=https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB alt=React 19 />
@@ -22,7 +22,7 @@ Powered by **Google Gemini Live Multimodal WebSocket API**, the platform allows 
 
 ## 🏗️ System Architecture
 
-`mermaid
+```mermaid
 flowchart TD
     Student([Student Voice Input]) -->|Microphone AudioStream 16kHz PCM| WebAudio[AudioContext & AudioWorklet / ScriptProcessor]
     WebAudio -->|Base64 PCM Chunks over WebSocket| GeminiWS[Gemini Multimodal Live API]
@@ -41,7 +41,7 @@ flowchart TD
 
     ScoreLog --> Dashboard[Glassmorphic Mission Control HUD]
     PDFEngine --> Download([Diagnostic Learning PDF])
-`
+```
 
 ---
 
@@ -71,7 +71,7 @@ flowchart TD
 
 ## 📂 Project Structure
 
-`
+```
 revisao-escolar/
 ├── public/                     # Static icons & vectors
 ├── src/
@@ -88,7 +88,7 @@ revisao-escolar/
 ├── package.json
 ├── tsconfig.json
 └── vite.config.ts
-`
+```
 
 ---
 
@@ -101,22 +101,22 @@ revisao-escolar/
 
 ### 1. Clone the Repository
 
-`ash
+```bash
 git clone https://github.com/felipedutrag/revisao-escolar.git
 cd revisao-escolar
-`
+```
 
 ### 2. Configure Environment
 
 Create a .env file in the root directory:
 
-`env
+```env
 VITE_GEMINI_API_KEY=your_gemini_api_key_here
-`
+```
 
 ### 3. Install & Launch
 
-`ash
+```bash
 # Install dependencies
 npm install
 
@@ -124,7 +124,7 @@ npm install
 npm run dev
 
 # Open in browser: http://localhost:5173
-`
+```
 
 ---
 
