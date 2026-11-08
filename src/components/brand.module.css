@@ -1,0 +1,77 @@
+.brand { display: inline-flex; align-items: center; gap: 9px; color: #e9ece7; font-family: system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: 650; letter-spacing: -0.8px; text-decoration: none; white-space: nowrap; flex-shrink: 0; line-height: 1.5; }
+.brand > svg { color: #b7cbb1; flex-shrink: 0; transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), filter .25s ease; }
+.brandText { transition: opacity .2s cubic-bezier(0.16, 1, 0.3, 1), transform .2s cubic-bezier(0.16, 1, 0.3, 1); }
+.light { font-weight: 350; }
+.brand sup { font-size: 10px; font-weight: 400; margin-left: 3px; position: relative; top: -.5em; color: #b7cbb1; }
+.brand:focus-visible { outline: 2px solid #b7cbb1; outline-offset: 5px; border-radius: 3px; }
+@media (max-width: 480px) { .brand { font-size: 19px; gap: 7px; } }
+
+.brandIcon {
+  color: #b7cbb1;
+  flex-shrink: 0;
+  overflow: visible;
+  filter: drop-shadow(0 0 6px rgba(183, 203, 177, 0.45));
+}
+.brandRect {
+  stroke: #b7cbb1;
+  stroke-width: 1.85;
+  fill: #b7cbb1;
+  fill-opacity: 0;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: brandDraw 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+.brandRect2 {
+  animation-delay: 0.2s;
+}
+.brandRect3 {
+  animation-delay: 0.4s;
+}
+@keyframes brandDraw {
+  0% { stroke-dashoffset: 1; fill-opacity: 0; }
+  45% { stroke-dashoffset: 0; fill-opacity: 0; }
+  60%, 80% { stroke-dashoffset: 0; fill-opacity: 0.28; }
+  100% { stroke-dashoffset: -1; fill-opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brandRect { animation: none; stroke-dashoffset: 0; fill-opacity: 0.2; }
+}
+
+.glowingIcon {
+  color: #b7cbb1;
+  display: inline-block;
+  overflow: visible;
+  filter: drop-shadow(0 0 8px rgba(183, 203, 177, 0.65)) drop-shadow(0 0 20px rgba(183, 203, 177, 0.35));
+  animation: iconGlow 3s ease-in-out infinite alternate;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.glowingIcon:hover {
+  filter: drop-shadow(0 0 14px rgba(183, 203, 177, 0.95)) drop-shadow(0 0 30px rgba(183, 203, 177, 0.65));
+  transform: scale(1.08);
+}
+
+.glowingRect {
+  stroke: #b7cbb1;
+  stroke-width: 1.85;
+  fill: #b7cbb1;
+  fill-opacity: 0.25;
+}
+
+@keyframes iconGlow {
+  0% {
+    filter: drop-shadow(0 0 6px rgba(183, 203, 177, 0.45)) drop-shadow(0 0 16px rgba(183, 203, 177, 0.2));
+    opacity: 0.85;
+  }
+  100% {
+    filter: drop-shadow(0 0 12px rgba(183, 203, 177, 0.85)) drop-shadow(0 0 26px rgba(183, 203, 177, 0.5));
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glowingIcon {
+    animation: none;
+    filter: drop-shadow(0 0 8px rgba(183, 203, 177, 0.6));
+  }
+}

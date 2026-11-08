@@ -64,35 +64,39 @@ function App() {
     }
   }, [easterEggs]);
 
-  // ROTA 1: /lilith (Interface 100% neutra, sem tema espacial, sem estrelas, sem easter eggs)
-  if (currentPath === '/lilith') {
-    return <LilithPage onBack={() => navigate('/')} onNavigate={(path) => navigate(path)} />;
-  }
-
-  // ROTA 2: /voices (Estúdio de Criação de Vozes Gemini Voice Design)
+  // ROTA 1: /voices (Estúdio de Criação de Vozes Gemini Voice Design)
   if (currentPath === '/voices') {
     return <VoicesPage onBack={() => navigate('/')} onNavigate={(path) => navigate(path)} />;
   }
 
-  // ROTA 3: /config ou / (com tema do Revisor)
-  return (
-    <>
-      <div className="space-bg">
-        <div className="stars"></div>
-        <div className="stars2"></div>
-      </div>
-
-      {easterEggs.map(egg => (
-        <div key={egg.id} className="easter-egg" style={{ left: egg.left }}>
-          Papai ❤️ Boni
+  // ROTA 2: /config (Configuração de Prompt e IA)
+  if (currentPath === '/config') {
+    return (
+      <>
+        <div className="space-bg">
+          <div className="stars"></div>
+          <div className="stars2"></div>
         </div>
-      ))}
-      
-      {/* ROTA: /config */}
-      {currentPath === '/config' ? (
         <ConfigPage onBack={() => navigate('/')} onNavigate={(path) => navigate(path)} />
-      ) : (
-        /* ROTA: / (Painel Principal do Revisor) */
+      </>
+    );
+  }
+
+  // ROTA 3: /astro ou /revisor (Painel Espacial de Estudos e Revisão Escolar)
+  if (currentPath === '/astro' || currentPath === '/revisor') {
+    return (
+      <>
+        <div className="space-bg">
+          <div className="stars"></div>
+          <div className="stars2"></div>
+        </div>
+
+        {easterEggs.map(egg => (
+          <div key={egg.id} className="easter-egg" style={{ left: egg.left }}>
+            Papai ❤️ Boni
+          </div>
+        ))}
+
         <div className="min-h-[100dvh] text-slate-50 flex flex-col items-center justify-center p-4 sm:p-6 overflow-y-auto w-full">
           <div className="w-full max-w-lg md:max-w-4xl flex flex-col md:flex-row-reverse gap-6 relative z-10 pt-4 pb-12">
             
@@ -193,10 +197,10 @@ function App() {
                       <span>🎙️</span> Vozes da IA
                     </button>
                     <button
-                      onClick={() => navigate('/lilith')}
+                      onClick={() => navigate('/')}
                       disabled={isRecordingVoice}
                       className="px-3 py-2 rounded-xl bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700 text-neutral-200 hover:text-white text-xs font-mono font-bold flex items-center gap-1.5 transition-all hover:scale-105 active:scale-95 shadow-md flex-none disabled:opacity-50 disabled:pointer-events-none"
-                      title="Abrir Interface Neutra Lilith"
+                      title="Abrir Lilith (Página Inicial)"
                     >
                       <span>⚡</span> Lilith
                     </button>
@@ -276,9 +280,12 @@ function App() {
             
           </div>
         </div>
-      )}
-    </>
-  );
+      </>
+    );
+  }
+
+  // ROTA PADRÃO / PÁGINA INICIAL: Lilith (Pública, Dark Occult Luxury, Live Voice com Gemini Live Engine)
+  return <LilithPage onBack={() => navigate('/astro')} onNavigate={(path) => navigate(path)} />;
 }
 
 export default App;

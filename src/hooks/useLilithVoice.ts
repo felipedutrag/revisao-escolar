@@ -176,23 +176,39 @@ export function useLilithVoice() {
             sumSquares += s * s;
           }
 
-          // VAD local para interrupção instantânea ao falar
+          // VAD local calibrado para evitar interrupções acidentais por eco, ruído ambiente ou respiração
           const rms = Math.sqrt(sumSquares / inputData.length);
-          if (rms > 0.035) {
+          const isAISpeaking = activeSourcesRef.current.length > 0;
+
+          // Sensibilidade do microfone ajustada:
+          // Quando a IA está falando, exige fala firme e sustentada (~120ms / 15 frames com RMS > 0.085)
+          // para nunca ser interrompida por vazamento do alto-falante, respiração ou cliques.
+          const speechThreshold = isAISpeaking ? 0.085 : 0.025;
+          const requiredFrames = isAISpeaking ? 15 : 4;
+
+          if (rms > speechThreshold) {
             consecutiveSpeechFrames++;
-            if (consecutiveSpeechFrames >= 2 && activeSourcesRef.current.length > 0) {
-              console.log("[Lilith] Usuário falando: interrompendo áudio imediatamente");
+            if (isAISpeaking && consecutiveSpeechFrames >= requiredFrames) {
+              console.log("[Lilith] Interrupção intencional detectada (usuário falou firme)");
               stopAllPlayback();
             }
           } else {
             consecutiveSpeechFrames = 0;
           }
 
-          // Envio contínuo de PCM 16kHz que também serve como heartbeat/keep-alive contra idle timeout
+          // Enquanto a IA está falando, silencia os dados de áudio enviados ao Gemini (keep-alive com zeros)
+          // até que o usuário atinja fala intencional sustentada. Isso evita que o eco da voz dela pelo alto-falante
+          // acione o VAD do servidor do Gemini e corte a própria fala dela.
+          let audioToSend = pcmData;
+          if (isAISpeaking && consecutiveSpeechFrames < requiredFrames) {
+            audioToSend = new Int16Array(pcmData.length);
+          }
+
+          // Envio de PCM 16kHz que mantém o WebSocket vivo sem acionar corte prematuro
           ws.send(JSON.stringify({
             realtimeInput: {
               audio: {
-                data: window.btoa(String.fromCharCode(...new Uint8Array(pcmData.buffer))),
+                data: window.btoa(String.fromCharCode(...new Uint8Array(audioToSend.buffer))),
                 mimeType: "audio/pcm;rate=16000"
               }
             }

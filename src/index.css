@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+@theme {
+  --color-lf-accent: #b7cbb1;
+  --color-lf-accent-hover: #c8d9c3;
+  --color-lf-accent-dark: #384b3d;
+  --color-lf-bg: #08090b;
+  --color-lf-panel: #101216;
+  --color-lf-surface: #111814;
+}
+
+:root {
+  --lf-accent: #b7cbb1;
+  --lf-accent-hover: #c8d9c3;
+  --lf-accent-dark: #384b3d;
+  --lf-accent-glow: rgba(183, 203, 177, 0.45);
+  --lf-bg: #08090b;
+  --lf-panel: #101216;
+  --lf-surface: #111814;
+  --lf-border: rgba(183, 203, 177, 0.22);
+}
+
 body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,14 +27,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #020617;
-  color: #f8fafc;
+  background-color: #08090b;
+  color: #ededef;
   overflow-x: hidden;
 }
 
 @layer utilities {
   .glass-panel {
     @apply bg-slate-900/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-3xl relative overflow-hidden;
+  }
+  .lf-panel {
+    background-color: rgba(17, 24, 20, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(183, 203, 177, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(183, 203, 177, 0.08);
   }
 }
 
@@ -26,7 +52,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  background: radial-gradient(ellipse at bottom, #111814 0%, #08090b 100%);
   overflow: hidden;
 }
 
@@ -37,10 +63,10 @@ body {
   height: 2px;
   background: transparent;
   box-shadow: 
-    10vw 20vh #FFF, 20vw 80vh #FFF, 30vw 40vh #FFF, 40vw 90vh #FFF, 50vw 10vh #FFF, 
-    60vw 60vh #FFF, 70vw 30vh #FFF, 80vw 70vh #FFF, 90vw 20vh #FFF, 15vw 50vh #FFF,
-    25vw 15vh #FFF, 35vw 75vh #FFF, 45vw 25vh #FFF, 55vw 85vh #FFF, 65vw 45vh #FFF,
-    75vw 5vh #FFF, 85vw 55vh #FFF, 95vw 95vh #FFF, 5vw 35vh #FFF;
+    10vw 20vh #b7cbb180, 20vw 80vh #FFF, 30vw 40vh #b7cbb160, 40vw 90vh #FFF, 50vw 10vh #b7cbb180, 
+    60vw 60vh #FFF, 70vw 30vh #b7cbb170, 80vw 70vh #FFF, 90vw 20vh #b7cbb180, 15vw 50vh #FFF,
+    25vw 15vh #FFF, 35vw 75vh #b7cbb160, 45vw 25vh #FFF, 55vw 85vh #FFF, 65vw 45vh #b7cbb180, 
+    75vw 5vh #FFF, 85vw 55vh #FFF, 95vw 95vh #b7cbb160, 5vw 35vh #FFF;
   animation: animStar 50s linear infinite;
 }
 
@@ -50,8 +76,8 @@ body {
   height: 3px;
   background: transparent;
   box-shadow: 
-    12vw 82vh #FFF, 22vw 12vh #FFF, 32vw 92vh #FFF, 42vw 22vh #FFF, 52vw 72vh #FFF, 
-    62vw 42vh #FFF, 72vw 62vh #FFF, 82vw 32vh #FFF, 92vw 82vh #FFF;
+    12vw 82vh #b7cbb150, 22vw 12vh #FFF, 32vw 92vh #b7cbb150, 42vw 22vh #FFF, 52vw 72vh #b7cbb150, 
+    62vw 42vh #FFF, 72vw 62vh #b7cbb150, 82vw 32vh #FFF, 92vw 82vh #b7cbb150;
   animation: animStar 100s linear infinite;
 }
 
@@ -69,12 +95,12 @@ body {
 
 .easter-egg {
   position: fixed;
-  color: #fbcfe8;
-  font-weight: 900;
-  font-size: 1.5rem;
+  color: #b7cbb1;
+  font-weight: 800;
+  font-size: 1.35rem;
   pointer-events: none;
   animation: floatUp 15s linear forwards;
   z-index: 50;
-  text-shadow: 0 0 15px rgba(236,72,153,0.8);
+  text-shadow: 0 0 15px rgba(183, 203, 177, 0.7);
   white-space: nowrap;
 }

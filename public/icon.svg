@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141814"/>
+      <stop offset="50%" stop-color="#0c0e0c"/>
+      <stop offset="100%" stop-color="#050605"/>
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(183, 203, 177, 0.45)"/>
+      <stop offset="50%" stop-color="rgba(183, 203, 177, 0.15)"/>
+      <stop offset="100%" stop-color="rgba(255, 255, 255, 0.05)"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b7cbb1" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#b7cbb1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo escuro com cantos arredondados (squircle elegante) -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="10" y="10" width="492" height="492" rx="104" fill="none" stroke="url(#borderGrad)" stroke-width="6"/>
+
+  <!-- Brilho sutil central -->
+  <circle cx="256" cy="256" r="160" fill="url(#glow)"/>
+
+  <!-- Símbolo da marca (LayoutTemplate estilizado)
+       Grid original 24x24 escalado para área central ~280px
+       Transform: scale(14) translate(6.28, 6.28)
+       Traço arredondado em #b7cbb1 com espessura proporcional
+  -->
+  <g transform="translate(88, 88) scale(14.0)" fill="none" stroke="#b7cbb1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top banner / header section -->
+    <rect width="18" height="7" x="3" y="3" rx="1.2" />
+    <!-- Bottom left card -->
+    <rect width="9" height="7" x="3" y="14" rx="1.2" />
+    <!-- Bottom right card -->
+    <rect width="5" height="7" x="16" y="14" rx="1.2" />
+  </g>
+</svg>

@@ -153,19 +153,41 @@ export function useGeminiTutor(onProgressUpdate?: (data: ProgressData) => void) 
             sumSquares += s * s;
           }
 
-          // VAD local para interrupção imediata quando o usuário começar a falar
+          // VAD local calibrado para evitar interrupções acidentais por eco, ruído ambiente ou respiração
           const rms = Math.sqrt(sumSquares / inputData.length);
-          if (rms > 0.035) {
+          const isAISpeaking = activeSourcesRef.current.length > 0;
+
+          // Sensibilidade do microfone ajustada:
+          // Quando a IA está falando, exige fala firme e sustentada (~120ms / 15 frames com RMS > 0.085)
+          // para nunca ser interrompida por vazamento do alto-falante, respiração ou cliques.
+          const speechThreshold = isAISpeaking ? 0.085 : 0.025;
+          const requiredFrames = isAISpeaking ? 15 : 4;
+
+          if (rms > speechThreshold) {
             consecutiveSpeechFrames++;
-            if (consecutiveSpeechFrames >= 2 && activeSourcesRef.current.length > 0) {
-              console.log("[Astro] Interrupção local: usuário falando no microfone");
+            if (isAISpeaking && consecutiveSpeechFrames >= requiredFrames) {
+              console.log("[Astro] Interrupção intencional detectada (usuário falou firme)");
               stopAllPlayback();
             }
           } else {
             consecutiveSpeechFrames = 0;
           }
 
-          ws.send(JSON.stringify({ realtimeInput: { audio: { data: window.btoa(String.fromCharCode(...new Uint8Array(pcmData.buffer))), mimeType: "audio/pcm;rate=16000" } } }));
+          // Enquanto a IA está falando, silencia os dados de áudio enviados ao Gemini (keep-alive com zeros)
+          // até que o usuário atinja fala intencional sustentada. Evita que o retorno do próprio som interrompa a IA no servidor.
+          let audioToSend = pcmData;
+          if (isAISpeaking && consecutiveSpeechFrames < requiredFrames) {
+            audioToSend = new Int16Array(pcmData.length);
+          }
+
+          ws.send(JSON.stringify({
+            realtimeInput: {
+              audio: {
+                data: window.btoa(String.fromCharCode(...new Uint8Array(audioToSend.buffer))),
+                mimeType: "audio/pcm;rate=16000"
+              }
+            }
+          }));
         };
         micSource.connect(workletNode);
       };

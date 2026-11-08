@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLilithVoice, DEFAULT_LILITH_PROMPT } from '../hooks/useLilithVoice';
 import { getAllVoices, DEFAULT_VOICE, type VoiceItem } from '../config/aiConfig';
+import Brand from '../components/Brand';
 
 interface LilithPageProps {
   onBack: () => void;
@@ -77,18 +78,10 @@ export function LilithPage({ onBack, onNavigate }: LilithPageProps) {
       
       {/* HEADER MINIMALISTA NEUTRO */}
       <header className="border-b border-neutral-800 bg-neutral-900/60 backdrop-blur-md px-4 sm:px-8 py-3.5 flex items-center justify-between sticky top-0 z-30">
-        <div className="flex items-center gap-3">
-          <div className="w-2.5 h-2.5 rounded-full bg-neutral-400" />
-          <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-widest uppercase text-neutral-100">
-              LILITH
-            </span>
-            <span className="text-[10px] text-neutral-400 font-mono tracking-tight">
-              NEUTRAL INTERFACE • GEMINI LIVE ENGINE
-            </span>
-          </div>
+        <div className="flex items-center gap-4">
+          <Brand size={22} badgeText="LILITH LIVE" />
 
-          <div className="ml-4 pl-4 border-l border-neutral-800 flex items-center gap-2">
+          <div className="border-l border-neutral-800 pl-4 flex items-center gap-2">
             <span
               className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-medium ${
                 isReconnecting
@@ -138,7 +131,7 @@ export function LilithPage({ onBack, onNavigate }: LilithPageProps) {
               className="px-3 py-1.5 rounded text-xs font-mono bg-rose-950/80 hover:bg-rose-900 text-rose-300 border border-rose-800 transition-colors flex items-center gap-1.5 shadow-sm"
               title="Criar e gerenciar vozes com Gemini Voice Design"
             >
-              <span>🎙️</span> Vozes da IA
+              <span>🎙️</span> Vozes
             </button>
           )}
 
@@ -155,9 +148,10 @@ export function LilithPage({ onBack, onNavigate }: LilithPageProps) {
 
           <button
             onClick={onBack}
-            className="px-3 py-1.5 rounded text-xs font-mono bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-700 transition-colors"
+            className="px-3 py-1.5 rounded text-xs font-mono bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-700 transition-colors flex items-center gap-1.5"
+            title="Acessar Revisor Escolar Espacial"
           >
-            ← Voltar ao Revisor
+            <span>🚀</span> Revisor Escolar
           </button>
         </div>
       </header>
